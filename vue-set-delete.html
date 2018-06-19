@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="value in obj">{{value}}</li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+    /*Vue.set(object, key, value)
+        object必须是嵌套在data对象里的对象，里面的属性也属于根级响应式属性
+        key参数必须是个字符串形式
+        value
+      Vue.delete(object, key) 同理
+
+      在这里我建议用生产版本的vue.min.js*/
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            a: 1,
+            b: 2,
+            obj: {
+                c: 1
+            }
+        },
+        created: function() {
+            console.log('vm.a  =' + this.a);
+        }
+    });
+
+    /*类名给obj对象添加属性m: 3*/
+    /*第一种方法：*/
+    /*Vue.set(vm.obj, 'm', 3);*/　// 生产版本和开发版本的vue.js都支持
+    /*第二种方法：*/
+    /*vm.$set(vm.obj, 'm', 3);*/ //　生产版本的vue.js支持，开发版本的不支持
+
+    /*删除属性　第一种方法*/
+    /*Vue.delete(vm.obj, 'm');*/ // 生产版本和开发版本的vue.js都支持
+
+    /*第二种方法：*/
+    /*vm.$delete(vm.obj, 'm');*/ //　生产版本的vue.js支持，开发版本的不支持
+</script>
+</html>

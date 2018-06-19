@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+    </div>
+</body>
+<script type="text/javascript">
+    /*Vue.nextTick() 这个实例方法在组件内使用特别方便，
+    因为它不需要全局 Vue ，它的回调 this 将自动绑定到当前的 Vue 实例上：*/
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'no update',
+
+        },
+        methods: {
+            updateMes: function() {
+                console.log('Before update message: ' + this.$el.textContent); //no update
+                this.message = 'updated';
+                console.log('After update message: ' + this.$el.textContent); //no update
+                var that = this;
+                Vue.nextTick(function() {
+                    console.log('nextTick() ... ' + that.$el.textContent); //updated
+                    /*可以做点DOM 更新后的操作*/
+                });
+                console.log('After nextTick: ' + this.$el.textContent);  //no update
+            }
+        }
+    });
+    vm.updateMes();
+    /*console.log('Before update message: ' + vm.$el.textContent);//  no update
+    vm.message = "updated";
+    console.log('After update message: ' + vm.$el.textContent); */// no update
+
+    /*Vue.nextTick(callback)的作用*/
+   /* vm.$nextTick(function () {
+        console.log('Vue.nextTick ==== After update message: ' + vm.$el.textContent);  //updated
+      */  /* 可以干点DOM 更新后的操作*/
+    /*});
+    console.log('After update message: ' + vm.$el.textContent);// no update
+*/
+</script>
+</html>

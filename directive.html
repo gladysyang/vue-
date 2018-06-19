@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input v-model="message"><br>
+        <span v-text="message">{{message}}</span>
+
+        <div v-html="html"></div>
+        <div v-if="flag">v-if : Yes</div>
+        <div v-else>v-else : No</div>
+        <div v-show='show'>v-show : Yes</div>
+        <ul>
+            <li v-for="value in arr">{{value}}</li>
+        </ul>
+
+        <button v-on:click="counter += 1">{{counter}}</button>
+        <br><br>
+
+        <span v-bind:style="styleObject"> v-bind 给元素绑定样式对象</span><br>
+
+        <span v-once>v-once : This will never change: {{message}}</span>
+    </div>
+</body>
+<script type="text/javascript">
+    var vm = new Vue({
+        el:'#app',
+        data: {
+            message: '双向数据绑定',
+            flag: true,
+            show: false,
+
+            arr: ['apple', 'orange', 'banana'],
+            counter: 0,
+            html: '<span>v-html: This is a span </span>',
+            styleObject: {
+                fontSize: '20px',
+                color: "red"
+            }
+        }
+    });
+    console.log(vm.show);
+</script>
+
+</html>

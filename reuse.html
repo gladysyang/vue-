@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="appOne">
+        <component-one></component-one>
+        <component-two></component-two>
+    </div>
+    <div id="appTwo">
+    </div>
+</body>
+<script type="text/javascript">
+
+    /*Register a component--> reuseComponent*/
+
+    Vue.component('reuse-component', {
+        template: '<div>You can reuse this component</div>'
+    })
+
+    Vue.component('component-one', {
+        template: "<div><reuse-component></reuse-component><div>"
+    })
+
+    Vue.component('component-two', {
+        template: "<reuse-component></reuse-component>"
+    })
+    new Vue({
+        el: '#appOne'
+    })
+
+   /* var reuseComponent = {
+        template: '<div>You can reuse this component</div>'
+    }*/
+
+    /*In this vue, you can use reuseComponent*/
+    /*new Vue({
+        el: '#appOne',
+        components: {
+            'child': reuseComponent
+        }
+    })
+
+    new Vue({
+        el: '#appTwo',
+        components: {
+            'child': reuseComponent
+        }
+    })*/
+
+</script>
+</html>

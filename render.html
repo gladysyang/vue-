@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <render-component>
+        <h1 slot='header'>About me</h1>
+        <p>Here's some page content, which will be included in vm.$slots.default, because it's not inside a named slot.</p>
+        <p slot='footer'>Copyright 2016 Evan You</p>
+        <p>If I have some content down here, it will also be included in vm.$slots.default.</p>.
+    </render-component>
+</body>
+<script type="text/javascript">
+    var Component = Vue.component('render-component', {
+        render: function(createElement) {
+            var header = this.$slot.header;
+            var body = this.$slot.default;
+            var footer = this.$slot.footer;
+            // {String | Object | Function}
+            // 一个 HTML 标签，组件设置，或一个函数
+            // 必须 Return 上述其中一个
+            return createElement('div',
+                // {String | Array}
+                // 子节点(VNodes). 可选项.
+                [
+                createElement('header', header),
+                createElement('body', body),
+                createElement('footer', footer)])
+        }
+    });
+    var vm = new Component('render-component');
+</script>
+</html>

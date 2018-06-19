@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input v-focus>
+        <p v-bond></p>
+    </div>
+
+</body>
+<script type="text/javascript">
+    // 注册一个全局自定义指令 v-focus 参数：id(string), Object | function()
+    /*Vue.directive('focus', {
+      // 当绑定元素插入到 DOM 中。
+      inserted: function (el) {
+        // 聚焦元素
+        el.focus();
+      }
+    });*/
+    new Vue({
+        el: '#app',
+        directives: {
+            focus: {
+                inserted: function(el) {
+                    el.focus();
+                }
+            },
+            bond: {
+                bind: function(el) {
+                    el.textContent = 'hello'
+                }
+            }
+        }
+    });
+</script>
+</html>

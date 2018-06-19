@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child></child>
+    </div>
+</body>
+<script type="text/javascript">
+
+    Vue.component("child", {
+        data: function() {
+            return {
+                childMessage: 'This is a child message',
+                parentMessage: 'parent   ' + this.$parent.message
+            }
+        },
+        template: "<div><span>childMessage:{{childMessage}}</span><br><span>parentMessage: {{parentMessage}}</span>" +
+        "<grandSon></grandSon>" + "</div>"
+    });
+
+    Vue.component("grandSon", {
+        data: function() {
+            return {
+                grandSonMessage: 'This is a grand son message',
+                grandPaMessage: 'grandPa   ' + this.$root.message
+            }
+        },
+        template: "<div>grandsonMessage: {{grandSonMessage}}  <br>   grandPaMessage: {{grandPaMessage}}</div>"
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'This is a  message'
+        }
+    })
+</script>
+</html>

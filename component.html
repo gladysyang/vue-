@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child my-message="hello"></child> <!--父组件给子组件传值，--><br>
+
+        <input v-model='myMessage'><br><!--数据双向绑定-->
+        <child v-bind:my-message="myMessage"></child><!--绑定props时，必须在子组件中先声明它-->
+        <button v-on:click="show" class="myMessage">show</button>
+        <div id="test"></div>
+    </div>
+
+    <!-- <div class="event-example">
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+    </div> -->
+</body>
+<script type="text/javascript">
+
+    /*创建子组件，由父组件给子组件传值，HTML特性不区分大小写的。　props里面的值可以是小头丰， prop的名字形式会从 camelCase 转为 kebab-case（短横线隔开）。应用场景：*/
+    /*props是单向绑定的，当父组件的值发生变化时，子组件会跟着发生变化，但是反过来就不行。
+    ×××××××在这里，父组件是child,子组件是span
+    */
+    var vm = new Vue({
+        el: '#app',
+        components: {
+            'child': {
+                template: "<span>{{myMessage}}</span>",
+                props: ['myMessage']
+            },
+            /*baby: {
+                ?????????
+            }*/
+        },
+        methods: {
+            show: function() {
+                console.log(this.myMessage);
+            }
+        }
+    });
+
+
+    /*组件触发事件，监听事件*/
+    /*Vue.component('button-counter', {
+        template: '<button v-on:click="increment">{{counter}}</button>',
+        data: function() {
+            return {
+                counter: 0
+            }
+        },
+        methods: {
+            increment: function() {
+                this.counter += 1;
+                this.$emit('increment');
+        console.log('component ' + this.counter);
+            }
+        }
+    });
+    new Vue({
+        el: '.event-example',
+        data: {
+            total: 0
+        },
+        methods: {
+            incrementTotal: function() {
+                this.total += 1;
+        console.log('vue ' + this.total);
+            }
+        }
+    })*/
+
+
+console.log("==========================================================================================");
+
+
+</script>
+</html>

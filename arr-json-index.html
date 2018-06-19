@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title></title>
+      <!-- <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script> -->
+      <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
+  </head>
+  <body>
+      <div id="test">
+        <li v-for="(value, $index) in arr">
+            <div class="{{value}}"></div>
+           {{value}} - {{$index}}
+        </li><hr>
+        <li class="class-{{value}}" :class="{'class2': true}" v-for="(value, $index) in json">{{value}}  -  {{$index}}</li>
+      </div>
+      <div id="app">
+          <!-- <li class="class-{{$index}}" :class="{'class2': true}" v-for="(value, $index) in arr">   {{value}} - {{$index}} </li><hr>
+         <li class="class-{{$index}}" :class="{'class2': true}" v-for="(value, key, $index) in json">{{value}}  -  {{key}}  - {{$index}}</li> -->
+         <!-- <li v-for="value in arr">   {{value}} - {{$index}} </li><hr>
+         <li v-for="value in json">{{value}}  -  {{$index}}</li> -->
+      </div>
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                arr: ['apple', 'banana', 'orange'],
+                json: {a: 'apple', b: 'banana', c: 'orange'}
+            }
+        });
+
+        var vm1 = new Vue({
+            el: "#test",
+            data: {
+                arr: ['apple1', 'banana1', 'orange1'],
+                json: {a: 'apple1', b: 'banana1', c: 'orange1'}
+            },
+        })
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <my-component></my-component>
+    </div>
+
+    <div id="part" ref='div'>
+        <child-one></child-one>
+        <child-two></child-two>
+    </div>
+
+    <div id="appTwo">
+        <my-component></my-component>
+    </div>
+</body>
+<script type="text/javascript">
+    /*注册组件： 自定义一个元素.  参数：id(string), Object | Function
+
+    ×××××××创建全局组件×××××××*/
+    Vue.component('my-component', {
+        template: '<div>Global component </div>',
+    });
+
+    new Vue({
+        el: '#app'
+    });
+
+    new Vue({
+        el: '#appTwo'
+    });
+
+    /*××××××局部注册组件××××××*/
+    var child = {
+        template: '<span>The first child component</span>',
+    }
+    var child2 = {
+        template: '<div>The second child component </div>'
+    }
+    var vm = new Vue({
+        el: '#part',
+        components: {
+            'child-one': child,
+            'child-two':child2
+        },
+        option: {
+            mess: 'parent'
+        },
+        /*n*/
+
+        vmChild: new Vue({
+
+        })
+    });
+    console.log(vm.$refs.div);
+
+</script>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+</body>
+<script type="text/javascript">
+    /*props 可以是数组或对象，用于接收来自父组件的数据。
+    props 可以是简单的数组，或者使用对象作为替代，
+    对象允许配置高级选项，如类型检测、自定义校验和设置默认值。*/
+    var Component = Vue.extend({
+        props: ['message'],
+        template: '<span message="message">{{message}}</span>'
+    });
+
+    /*propsData创建实例时传递 props。主要作用是方便测试。*/
+    var vm = new Component({
+        el: '#app',
+        propsData: {
+            message: 'hello'
+        }
+    });
+
+
+</script>
+</html>

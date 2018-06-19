@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!-- <script type="text/javascript" src="/home/gladysyang/Downloads/vue.js"></script> -->
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div class="once">
+        <span v-once>{{message}}</span>
+
+    </div>
+    <div class="bind">
+        <!-- <div v-bind:class="objectClass">
+            class为一个对象
+        </div>
+        <div v-bind:class="native">
+            只传一个属性
+        </div> -->
+
+        <div v-bind:style="objectStyle">
+            给元素绑定样式对象
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+
+    /*once */
+    /*var vm = new Vue({
+        el: '.once',
+        data: {
+            message: 'hello'
+        }
+    })*/
+
+console.log('---------------------------------------------------------------------------------');
+
+    /*过滤器filter 管道符*/
+    /*var vm = new Vue({
+        el: '.once',
+        data: {
+            message: ''
+        },
+        filters: {
+            mes: function(value) {
+                if (!value) {
+                    return '';
+                }
+                value = value.toString();
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            }
+        }
+    })*/
+
+console.log('---------------------------------------------------------------------------------');
+
+    /*用v-bind将class和style绑在一起*/
+    /*var vm = new Vue({
+        el: '.bind',
+        data: {
+            /*objectClass 里面放的是标签的class,值为true,起作用。值为false时，不起作用
+            objectClass: {
+                static: true,
+                native: false
+            },
+            native: true
+        }
+    })*/
+
+console.log('---------------------------------------------------------------------------------');
+
+    var vmStyle = new Vue({
+        el: '.bind',
+        data: {
+            objectStyle: {
+                color: "red",
+                fontSize: "14px"
+            }
+        }
+    })
+</script>
+<style type="text/css">
+    .static {
+        color: blue;
+    }
+    .native {
+        font-size: 40px;
+    }
+</style>
+</html>

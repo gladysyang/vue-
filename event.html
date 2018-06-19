@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+    </div>
+</body>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        template: '<span>自定义监听事件</span>',
+        data: {
+            message: 'Hello World',
+            num: 1
+        }
+    });
+    console.log("自定义一个监听事件");
+    vm.$on('modifyColor', function(args) {
+        vm.$el.style.color = 'red';
+        alert(args);
+    });
+    vm.$emit('modifyColor', vm.num);
+
+    vm.$once('show', function(message) {
+        alert(message);
+    });
+    vm.$emit('show', vm.message);//只隐藏了监听器，并没有直接移除
+    vm.$emit('show', vm.message);
+
+    console.log(vm);
+    vm.$off('modifyColor'); /*//真正的移除了监听器*/
+    vm.$emit('modifyColor', vm.num)
+    console.log("移除完modifyColor监听器的vm对象实例");
+    console.log(vm);
+
+</script>
+</html>

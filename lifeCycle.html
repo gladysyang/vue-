@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+</body>
+<script type="text/javascript">
+    var Component = Vue.component('my-component', {
+        data: function() {
+            return {
+                message: 'hello'
+            }
+        },
+        template: '<div>{{message}}</div>',
+        methods: {
+            change: function() {
+                // 修改数据
+              this.message = 'changed';
+              console.log('out nextTick function: ' + this.$el.textContent);
+              // DOM 还没有更新
+              this.$nextTick(function () {
+                // DOM 现在更新了
+                // `this` 绑定到当前实例
+                /*可以在这里做别的一些操作*/
+                var that = this;
+                console.log('in nextTick function: ' + that.$el.textContent);
+              })
+            }
+        }
+    });
+    var vm = new Component('my-component');
+    console.log('创建一个Vue实例，查看她是否有el选项，如果没有，去挂载，如果有，...');
+    vm.$mount('#app');
+
+    console.log('挂载完了之后，看是否有template，如果有，它将会替代el,如果没有，el会被当做template');
+    console.log('调用Vue实例中的一系列方法，update DOM');
+    vm.change();
+    console.log("Vue实例销毁之前　：");
+    console.log(vm);
+
+    /*vm.$destroy();
+    console.log("Vue实例销毁之后 : ");
+    console.log(vm);*/
+</script>
+</html>

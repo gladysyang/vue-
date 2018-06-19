@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- <script type="text/javascript" src="/home/gladysyang/Downloads/vue.min.js"></script> -->
+
+</head>
+<body>
+    <div class="box">
+        <span v-once>{{str}}</span></br>
+        <input type="text" name="" v-model='message'><br><!-- 双向数据绑定 -->
+        {{msg2}}<br>
+        {{msg3}}
+        <!--注意： angular 中 ng-repeat, vue中 v-for -->
+
+    </div>
+    <div class="example">
+        <span>The message is : {{message}}</span><br>
+
+        <!--computed 计算属性-->
+        <span>The reverseMessage is by computed : {{reverseMessage}}</span><br>
+        <span>The now time : {{now}}</span>
+        <br>
+
+        <!--调用methods属性里的方法-->
+        <span>The reverseMessage is by methods : {{reverseMessageMethod()}}</span>
+
+    </div>
+    <div class="next-tick">{{mes}}</div>
+    <div class="component">
+        <my-com></my-com>
+        <com></com>
+    </div>
+</body>
+<script type="text/javascript">
+    /*angular*/
+    /*var app = angular.module('app', []);
+    app.controller('xxx', function($scope) {
+        $scope.msg = "hello";
+    });
+    html:
+    div ng-controller = "xxx"; {{msg}}*/
+
+    /*vue*/
+    /*data里面放的json数据,数组，字符串， 数字等*/
+    /*el里面放的是选择器*/
+    /*data对象和computed对象中都有message属性时，computed中message属性会把data中的属性给覆盖了*/
+    /*var vm = new Vue({
+        el: '.box',
+        data: {
+            message: 'welcome vue',
+            msg2: 13,
+            msg3: ['apple', 'banana', 'orange'],
+            json: {a: 'apple', b: 'banana', c: 'orange'},
+        },
+        computed: {
+            message: function() {
+                return 'wel';
+            }
+        }
+   });
+
+*/
+
+    /*el 是固定的，它的值可以是选择器，也可以是DOM元素,可以通过vm.$el获取el的值*/
+    // var vm = new Vue({
+    //     el: '#id',
+    //     data: {
+    //         a: 1
+    //     }
+    // });
+
+    console.log("======================================================================");
+
+    /*template,类型就是个字符串。用template的值把元素为el值的元素给替换了，如果template为空字符串的话，是没有任何反应的*/
+    /*1.挂载 */
+    var vm = new Vue(
+        {
+            el: '.example',
+            data: {
+                a: 1
+            },
+            template: "<div>{{a}}</div>"
+        },
+        beforeCreate: function() {
+            console.log('创建前');
+            console.log(this.$el);
+            console.log(this.a);
+        },
+        created: function() {
+            console.log('创建前');
+            console.log(this.$el);
+            console.log(this.a);
+        },
+        beforeMount: function() {
+            console.log('载入钱');
+            console.log(this.$el);
+            console.log(this.a);
+        },
+        mounted: function() {
+            console.log('载入后');
+            console.log(this.$el);
+            console.log(this.a);
+        },
+        beforeUpdate: function() {
+            console.log('更新前');
+            console.log(this.$el);
+            console.log(this.a);
+        },
+        updated: function() {
+            console.log('更新后');
+            console.log(this.$el);
+            console.log(this.a);
+        },
+        beforeDestroy: function() {
+            console.log('销毁前');
+            console.log(this.$el);
+            console.log(this.a);
+        },
+        destroyed: function() {
+            console.log('销毁后');
+            console.log(this.$el);
+            console.log(this.a);
+        }
+    );
+
+    /*2.挂载*/
+    // var vm = new Vue({
+    //     data: {
+    //         a: 1
+    //     },
+    //     template: "<div>{{a}}</div>"
+    // });
+
+    // vm.$mount('.example');
+
+    // console.log("======================================================================");
+
+    /*Vue.filter  注册一个filter, 参数：id(string), function()*/
+    // Vue.filter('my-filter', function(value) {
+
+    // });
+
+    /*获取注册过的filter*/
+    // var myFilter = Vue.filter('my-filter');
+
+    // console.log("======================================================================");
+
+    /*注册组件： 自定义一个元素.  参数：id(string), Object | Function
+
+    ×××××××创建全局组件×××××××
+    <div id="name">
+        <my-component></my-component>
+    </div>*/
+    // Vue.component('my-component', {
+    //     template: '<div>A component </div>'
+    // });
+
+    // new Vue({
+    //     el: '#name'
+    // });
+
+    /*××××××局部注册组件××××××*/
+    // var child = {
+    //     template: '<span>A child component</span>',
+    // }
+    // var c2 = {
+    //     template: '<div>A component </div>'
+    // }
+    // var vm = new Vue({
+    //     el: '.component',
+    //     components: {
+    //         'my-com': child,
+    //         'com':c2
+    //     }
+    // });
+
+    // console.log("======================================================================");
+
+
+</script>
+</html>

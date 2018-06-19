@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <span>The message is : {{message}}</span><br>
+
+        <!--computed 计算属性-->
+        <span>The reverseMessage is by computed : {{reverseMessage}}</span><br>
+        <span>The now time : {{now}}</span>
+        <br>
+
+        <!--调用methods属性里的方法-->
+        <span>The reverseMessage is by methods : {{reverseMessageMethod()}}</span>
+    </div>
+</body>
+<script type="text/javascript">
+    /*计算属性computed 和 methods的区别*/
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            a: 2,
+            message: "hello world"
+        },
+       /*computed 计算属性依赖于它的依赖缓存。
+        计算属性只有在它的相关依赖发生改变时才会重新取值。
+        这就意味着只要 message 没有发生改变，多次访问 reversedMessage
+        计算属性会立即返回之前的计算结果，而不必再次执行函数。
+        注意：     计算属性对象里的属性都会被Vue转换 为getter/setter*/
+        computed: {
+            reverseMessage: function() {
+                return this.message.split('').reverse().join('');
+            },
+            /*比如获取当前时间,如果不重新刷新页面，这个now时间一直是第一次获取到的时间，所以这种情况下我们就需要将获取当前时间的方法写在methods里面，每次调用methods时都会执行该方法*/
+            now: function() {
+                return  Date.now();
+            },
+            mul: function() {
+                temp = this.a;
+                this.a += 1;
+                console.log(this.a);
+                return temp;
+            },
+            computedPlus: {
+                get: function() {
+                    return this.a + 1;
+                },
+                set: function(v) {
+                    return this.a = v - 1;
+                }
+            }
+        },
+        watch: {
+            a: function() {
+                console.log("in watch  = " + this.a);
+            }
+        },
+
+        /*每当重新渲染的时候，methods 调用总会执行函数。methods里面的方法名尽量不要跟computed里面的属性名同名*/
+        methods: {
+            reverseMessageMethod: function() {
+                return this.message.split('').reverse().join('');
+            },
+            nowMethod: function() {
+                return Date.now();
+            },
+            methodsPlus: function () {
+                return this.a ++;
+            }
+        }
+    });
+    /*结果不变，在于依赖缓存*/
+    console.log(vm.now);
+    console.log(vm.now);
+
+    /*结果不一样*/
+    console.log(vm.nowMethod());
+    console.log(vm.nowMethod());
+
+    console.log('vm.reverseMessage = ' + vm.reverseMessage);
+    vm.message = 'world';
+    console.log('vm.reverseMessage = ' + vm.reverseMessage);
+
+    console.log('vm.a =' + vm.a);  //=2
+    console.log('vm.mul = ' + vm.mul);  //执行两次结果都是2
+    console.log('vm.a =' + vm.a);
+    console.log('vm.mul = ' + vm.mul);
+
+    /*console.log('vm.a = ' + vm.a);  // 这时a = 3
+    console.log('vm.methodsPlus() = ' + vm.methodsPlus()); //第一次=3，第二次=4
+    console.log('vm.methodsPlus() = ' + vm.methodsPlus());
+
+    console.log('执行了vm.methodsPlusmethodsPlus()方法之后的a 的值： ');
+    console.log('vm.a = ' + vm.a); //=5*/
+
+    /*当然了，我们为什么需要缓存，假设我们有个计算属性A，这个计算属性需要大量的数组遍历和大量的计算，如果没有缓存，我们将不可避免的要进行多次执行A的getter*/
+
+</script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <hello-world></hello-world>
+
+        <template v-if="flag">
+            <div>flag = true</div>
+            <div>world world world</div>
+        </template>
+    </div>
+</body>
+
+<script type="text/x-template" id="hello-world-template">
+  <p>Hello hello hello</p>
+</script>
+
+<script type="text/javascript">
+    Vue.component('hello-world', {
+        template: '#hello-world-template'
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            flag: true
+        }
+    })
+</script>
+</html>

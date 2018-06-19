@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{message | messageFilter}}
+    </div>
+</body>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello world'
+        },
+        filters: {
+            messageFilter: function(value) {
+                if (!value) {
+                    return '';
+                }
+                value = value.toString();
+                return value.split('').reverse().join('');
+            }
+        }
+    })
+</script>
+</html>
